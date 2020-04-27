@@ -2,16 +2,14 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, Button, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import * as appActoins from '../store/actions/appActions';
+import * as appActions from '../store/actions/appActions';
 import ENV from '../env';
 
 const ServicesScreen = (props) => {
   const [currentText, setCurrentText] = useState('');
   const dispatch = useDispatch();
 
-  const selectedDeviceId = useSelector(
-    (state) => state.selectedDevice.deviceId,
-  );
+  const isConnected = useSelector((state) => state.isConnected);
 
   const textChangeHandler = (text) => {
     setCurrentText(text);
@@ -27,21 +25,22 @@ const ServicesScreen = (props) => {
     return bytes.concat(10);
   };
 
-  const submitHandler = (data) => {
-    dispatch(
-      appActoins.sendMessage(
-        selectedDeviceId,
-        ENV.serviceId,
-        ENV.writeCharacteristicId,
-        convertToByteArray(data),
-      ),
-    );
+  const onSubmit = (data) => {
+    dispatch(appActions.sendMessage(data + '\n'));
   };
+
+  const onDiscconect = () => {
+    dispatch(appActions.disconnectCurrentDevice());
+  };
+
+  if (!isConnected) {
+    props.navigation.navigate('ScanDevices');
+  }
 
   const goThruTest = (numOfLeds, delay) => {
     let counter = 0;
     const myInterval = setInterval(() => {
-      submitHandler(`L${counter} ${(counter % 3) + 1}`);
+      onSubmit(`L${counter} 2`);
       counter++;
       console.log(counter);
       if (counter === numOfLeds) {
@@ -53,18 +52,16 @@ const ServicesScreen = (props) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button title="SUBMIT" onPress={onSubmit.bind(this, currentText)} />
+        <Button title="TEST" onPress={goThruTest.bind(this, 48, 5)} />
+        <Button title="DISCONNECT" onPress={onDiscconect} />
+      </View>
       <TextInput
         style={styles.input}
         value={currentText}
         onChangeText={textChangeHandler}
       />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="SUBMIT"
-          onPress={submitHandler.bind(this, currentText)}
-        />
-        <Button title="TEST" onPress={goThruTest.bind(this, 49, 150)} />
-      </View>
     </View>
   );
 };
@@ -72,6 +69,7 @@ const ServicesScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column-reverse',
   },
   input: {
     borderBottomColor: '#ccc',
@@ -79,7 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonContainer: {
-    height: '20%',
+    height: '30%',
     justifyContent: 'space-around',
   },
 });

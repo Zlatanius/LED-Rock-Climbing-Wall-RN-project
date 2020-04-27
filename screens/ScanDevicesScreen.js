@@ -9,27 +9,18 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {NativeModules, NativeEventEmitter} from 'react-native';
 
 import * as appActions from '../store/actions/appActions';
 import DeviceItem from '../components/DeviceItem';
-
-const BleManagerModule = NativeModules.BleManager;
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 const ScanDevicesScreen = (props) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const dispatch = useDispatch();
 
-  const isInitialised = useSelector((state) => state.moduleIsInitialized);
   const deviceIsConnected = useSelector((state) => state.isConnected);
   const didNotConnect = useSelector((state) => state.didNotConnect);
-  const currentDeviceId = useSelector((state) => state.selectedDevice.deviceId);
-  const currPeripherals = useSelector((state) => state.discoveredDevices);
-
-  let discoverPeripheralHandler;
-  let stopScanHandler;
+  const pairedDevices = useSelector((state) => state.pairedDevices);
 
   useEffect(() => {
     if (Platform.OS === 'android' && Platform.Version >= 23) {
@@ -43,70 +34,29 @@ const ScanDevicesScreen = (props) => {
             PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
           ).then((result) => {
             if (result) {
-              console.log('User accept');
+              console.log('User accept permissions');
             } else {
-              console.log('User refuse');
+              console.log('User refuse permissions');
             }
           });
         }
       });
     }
-  }, [PermissionsAndroid]);
+  }, []);
 
   useEffect(() => {
-    dispatch(appActions.startBle());
-  }, [dispatch]);
-
-  useEffect(() => {
-    discoverPeripheralHandler = bleManagerEmitter.addListener(
-      'BleManagerDiscoverPeripheral',
-      handleDiscoverPeripheral,
-    );
-    stopScanHandler = bleManagerEmitter.addListener(
-      'BleManagerStopScan',
-      handleStopScan,
-    );
-    return () => {
-      discoverPeripheralHandler.remove();
-      stopScanHandler.remove();
-    };
-  });
-
-  const handleDiscoverPeripheral = (peripheral) => {
-    const peripherals = currPeripherals;
-    if (!peripherals.find((per) => per.id === peripheral.id)) {
-      console.log('Adding peripheral');
-      dispatch(appActions.addPeripheral(peripheral));
-    }
-  };
-
-  const handleStopScan = () => {
-    console.log('Scan stop');
-    discoverPeripheralHandler.remove();
-    stopScanHandler.remove();
-  };
-
-  const startScan = () => {
-    setIsRefreshing(true);
-    console.log('Started Scan');
-    if (isInitialised) {
-      dispatch(appActions.startScan());
-    }
-    setIsRefreshing(false);
-  };
+    dispatch(appActions.intialize());
+  }, []);
 
   if (deviceIsConnected) {
     props.navigation.navigate('ReadWrite');
   }
 
-  const selectDeviceHandler = (id) => {
-    dispatch(appActions.connectToDevice(id));
-    if (didNotConnect) {
-      setTimeout(selectDeviceHandler.bind(this, id), 1000);
-    }
+  const selectDeviceHandler = async (id) => {
+    await dispatch(appActions.connectToDevice(id));
   };
 
-  const disconnectHandler = (deviceId) => {
+  const onDiscconect = () => {
     dispatch(appActions.disconnectCurrentDevice());
   };
 
@@ -114,15 +64,14 @@ const ScanDevicesScreen = (props) => {
     <View style={styles.mainContainer}>
       <View style={styles.devicesContainer}>
         <FlatList
-          onRefresh={startScan}
-          refreshing={isRefreshing}
-          data={currPeripherals}
+          // onRefresh={startScan}
+          // refreshing={isRefreshing}
+          data={pairedDevices}
           renderItem={(itemData) => {
             return (
               <DeviceItem
                 name={itemData.item.name}
                 id={itemData.item.id}
-                numOfServices={itemData.item.advertising.serviceUUIDs.length}
                 pressHandler={selectDeviceHandler.bind(this, itemData.item.id)}
               />
             );
@@ -131,11 +80,10 @@ const ScanDevicesScreen = (props) => {
         />
       </View>
       <View style={styles.buttonsContainer}>
-        <Button style={styles.button} title="SCAN" onPress={startScan} />
         <Button
           style={styles.button}
           title="DISCONNECT"
-          onPress={disconnectHandler.bind(this, currentDeviceId)}
+          onPress={onDiscconect}
         />
       </View>
     </View>

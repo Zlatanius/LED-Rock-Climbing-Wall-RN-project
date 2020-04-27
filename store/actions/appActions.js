@@ -1,75 +1,77 @@
-export const INITIALIZE = 'INITIALIZE';
-export const ADD_PERIPHERAL = 'ADD_PERIPHERAL';
 export const CONNECT_TO_DEVICE = 'CONNECT_TO_DEVICE';
 export const DID_NOT_CONNECT = 'DID_NOT_CONNECT';
+export const ADD_PAIRED_DEVICES = 'ADD_PAIRED_DEVICES';
 export const DISCONNECT = 'DISCONNECT';
-export const SCANING = 'SCANING';
 
-export const startBle = () => {
-  return async (dispatch, getState, BleManager) => {
-    await BleManager.start({showAlert: false}).then(() => {
-      console.log('Module Started');
-    });
-    dispatch({type: INITIALIZE});
-  };
+const getPairedDevicesHelper = async (dispatch, BluethoothModule) => {
+  console.log('getting paired devices');
+  const devices = await BluethoothModule.list();
+  dispatch({type: ADD_PAIRED_DEVICES, devices: devices});
 };
 
-export const startScan = () => {
-  return async (dispatch, getState, BleManager) => {
-    BleManager.scan([], 5, true);
-    dispatch({type: SCANING});
-  };
+const connectToDeviceHelepr = async (
+  dispatch,
+  BluethoothModule,
+  isConnected,
+  deviceId,
+) => {
+  try {
+    const connectedDevice = isConnected
+      ? await BluethoothModule.getConnectedDevice()
+      : await BluethoothModule.connect(deviceId);
+    console.log(connectedDevice);
+    console.log('connected');
+    dispatch({type: CONNECT_TO_DEVICE, connectedDevice: connectedDevice});
+  } catch (error) {
+    console.log('did not connect');
+    console.log(error);
+    dispatch({type: DID_NOT_CONNECT});
+  }
 };
 
-export const addPeripheral = (peripheral) => {
-  return {type: ADD_PERIPHERAL, peripheral: peripheral};
+export const intialize = () => {
+  return async (dispatch, getState, {BluethoothModule, BTCharsets}) => {
+    await BluethoothModule.setEncoding(BTCharsets.ASCII);
+    const isConnected = await BluethoothModule.isConnected();
+    console.log(`Device is connected: ${isConnected}`);
+    if (isConnected) {
+      connectToDeviceHelepr(dispatch, BluethoothModule, true);
+    } else {
+      await getPairedDevicesHelper(dispatch, BluethoothModule);
+    }
+  };
 };
 
 export const connectToDevice = (deviceId) => {
-  return async (dispatch, getState, BleManager) => {
+  return async (dispatch, getState, {BluethoothModule, BTCharsets}) => {
+    console.log('connecting');
+    console.log(deviceId);
+    connectToDeviceHelepr(dispatch, BluethoothModule, false, deviceId);
+  };
+};
+
+export const sendMessage = (data) => {
+  return async (dispatch, getState, {BluethoothModule, BTCharsets}) => {
+    console.log(data);
     try {
-      await BleManager.connect(deviceId);
-      console.log('connected');
-      const services = await BleManager.retrieveServices(deviceId);
-      dispatch({type: CONNECT_TO_DEVICE, deviceId: deviceId});
-    } catch {
-      console.log('Error');
+      const response = await BluethoothModule.write(data);
+      console.log(response);
+    } catch (error) {
+      console.log('Error sending message');
       console.log(error);
-      dispatch({type: DID_NOT_CONNECT});
     }
   };
 };
 
 export const disconnectCurrentDevice = () => {
-  return async (dispatch, getState, BleManager) => {
-    BleManager.getConnectedPeripherals([]).then((devicesArray) => {
-      console.log(devicesArray[0].id);
-      BleManager.disconnect(devicesArray[0].id)
-        .then(() => {
-          console.log('disconecting');
-          dispatch({type: DISCONNECT});
-        })
-        .catch((error) => {
-          console.log('error');
-        });
-    });
-  };
-};
-
-export const sendMessage = (deviceId, serviceId, characteristicId, data) => {
-  return async (dispatch, getState, BleManager) => {
+  return async (dispatch, getState, {BluethoothModule, BTCharsets}) => {
     try {
-      const response = await BleManager.write(
-        deviceId,
-        serviceId,
-        characteristicId,
-        data,
-        20,
-      );
-      console.log(response);
-    } catch {
-      console.log('Error');
-      console.log(getState.selectedDevice.deviceId);
+      await BluethoothModule.disconnect();
+      console.log('disconnected');
+      dispatch({type: DISCONNECT});
+    } catch (error) {
+      console.log('disconnect failed');
+      console.log(error);
     }
   };
 };

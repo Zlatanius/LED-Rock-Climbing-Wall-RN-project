@@ -9,9 +9,6 @@ const deviceItem = (props) => {
           Name: {props.name}
         </Text>
         <Text style={styles.text}>Id: {props.id}</Text>
-        <Text style={styles.text}>
-          {props.numOfServices} services available
-        </Text>
       </View>
     </TouchableOpacity>
   );
