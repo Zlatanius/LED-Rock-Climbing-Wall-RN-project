@@ -13,13 +13,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as appActions from '../store/actions/appActions';
 import DeviceItem from '../components/DeviceItem';
 
-const ScanDevicesScreen = (props) => {
+const ConnectScreen = (props) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const dispatch = useDispatch();
 
-  const deviceIsConnected = useSelector((state) => state.isConnected);
-  const didNotConnect = useSelector((state) => state.didNotConnect);
   const pairedDevices = useSelector((state) => state.pairedDevices);
 
   useEffect(() => {
@@ -48,10 +46,6 @@ const ScanDevicesScreen = (props) => {
     dispatch(appActions.intialize());
   }, []);
 
-  if (deviceIsConnected) {
-    props.navigation.navigate('ReadWrite');
-  }
-
   const selectDeviceHandler = async (id) => {
     await dispatch(appActions.connectToDevice(id));
   };
@@ -65,7 +59,7 @@ const ScanDevicesScreen = (props) => {
       <View style={styles.devicesContainer}>
         <FlatList
           // onRefresh={startScan}
-          // refreshing={isRefreshing}
+          refreshing={isRefreshing}
           data={pairedDevices}
           renderItem={(itemData) => {
             return (
@@ -108,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScanDevicesScreen;
+export default ConnectScreen;

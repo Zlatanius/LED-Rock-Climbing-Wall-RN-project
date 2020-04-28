@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as appActions from '../store/actions/appActions';
 import ENV from '../env';
 
-const ServicesScreen = (props) => {
+const ReadWriteScreen = (props) => {
   const [currentText, setCurrentText] = useState('');
   const dispatch = useDispatch();
 
@@ -29,13 +29,10 @@ const ServicesScreen = (props) => {
     dispatch(appActions.sendMessage(data + '\n'));
   };
 
-  const onDiscconect = () => {
-    dispatch(appActions.disconnectCurrentDevice());
+  const onDiscconect = async () => {
+    await dispatch(appActions.disconnectCurrentDevice());
+    props.navigation.navigate('Connect');
   };
-
-  if (!isConnected) {
-    props.navigation.navigate('ScanDevices');
-  }
 
   const goThruTest = (numOfLeds, delay) => {
     let counter = 0;
@@ -50,11 +47,15 @@ const ServicesScreen = (props) => {
     }, delay);
   };
 
-  return (
+  return !isConnected ? (
+    <View style={styles.warning}>
+      <Text>There is no device connected</Text>
+    </View>
+  ) : (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button title="SUBMIT" onPress={onSubmit.bind(this, currentText)} />
-        <Button title="TEST" onPress={goThruTest.bind(this, 48, 5)} />
+        <Button title="TEST" onPress={goThruTest.bind(this, 48, 1)} />
         <Button title="DISCONNECT" onPress={onDiscconect} />
       </View>
       <TextInput
@@ -80,6 +81,11 @@ const styles = StyleSheet.create({
     height: '30%',
     justifyContent: 'space-around',
   },
+  warning: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
-export default ServicesScreen;
+export default ReadWriteScreen;

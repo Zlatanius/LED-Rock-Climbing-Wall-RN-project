@@ -54,8 +54,7 @@ export const sendMessage = (data) => {
   return async (dispatch, getState, {BluethoothModule, BTCharsets}) => {
     console.log(data);
     try {
-      const response = await BluethoothModule.write(data);
-      console.log(response);
+      await BluethoothModule.write(data);
     } catch (error) {
       console.log('Error sending message');
       console.log(error);
