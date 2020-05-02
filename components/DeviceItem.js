@@ -3,11 +3,11 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 
 const deviceItem = (props) => {
-  const isConnected = useSelector((state) => state.isConnected);
+  const isConnected = useSelector((state) => state.main.isConnected);
 
   const connectedDeviceId = useSelector((state) => {
     if (isConnected) {
-      return state.connectedDevice.id;
+      return state.main.connectedDevice.id;
     }
   });
 

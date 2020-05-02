@@ -3,8 +3,7 @@ import {
   DID_NOT_CONNECT,
   ADD_PAIRED_DEVICES,
   DISCONNECT,
-} from '../actions/appActions';
-import ENV from '../../env';
+} from '../actions/mainActions';
 
 const initialState = {
   pairedDevices: [],
@@ -16,7 +15,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_PAIRED_DEVICES:
-      return {...initialState, pairedDevices: action.devices};
+      return {...state, pairedDevices: action.devices};
     case CONNECT_TO_DEVICE:
       return {
         ...state,

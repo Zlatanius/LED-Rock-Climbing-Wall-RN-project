@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import * as appActions from '../store/actions/appActions';
+import * as appActions from '../store/actions/mainActions';
 import DeviceItem from '../components/DeviceItem';
 
 const ConnectScreen = (props) => {
@@ -18,7 +18,7 @@ const ConnectScreen = (props) => {
 
   const dispatch = useDispatch();
 
-  const pairedDevices = useSelector((state) => state.pairedDevices);
+  const pairedDevices = useSelector((state) => state.main.pairedDevices);
 
   useEffect(() => {
     if (Platform.OS === 'android' && Platform.Version >= 23) {

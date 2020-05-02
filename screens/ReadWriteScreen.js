@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, Button, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import * as appActions from '../store/actions/appActions';
+import * as mainActions from '../store/actions/mainActions';
 import ENV from '../env';
 
 const ReadWriteScreen = (props) => {
   const [currentText, setCurrentText] = useState('');
   const dispatch = useDispatch();
 
-  const isConnected = useSelector((state) => state.isConnected);
+  const isConnected = useSelector((state) => state.main.isConnected);
 
   const textChangeHandler = (text) => {
     setCurrentText(text);
@@ -26,11 +26,11 @@ const ReadWriteScreen = (props) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(appActions.sendMessage(data + '\n'));
+    dispatch(mainActions.sendMessage(data + '\n'));
   };
 
   const onDiscconect = async () => {
-    await dispatch(appActions.disconnectCurrentDevice());
+    await dispatch(mainActions.disconnectCurrentDevice());
     props.navigation.navigate('Connect');
   };
 
