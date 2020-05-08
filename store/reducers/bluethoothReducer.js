@@ -3,7 +3,7 @@ import {
   DID_NOT_CONNECT,
   ADD_PAIRED_DEVICES,
   DISCONNECT,
-} from '../actions/mainActions';
+} from '../actions/bluethoothActions';
 
 const initialState = {
   pairedDevices: [],

@@ -1,7 +1,5 @@
 const variables = {
-  serviceId: 'ffe0',
-  readCharacteristicId: 'ffe1',
-  writeCharacteristicId: 'ffe1',
+  numOfLeds: 49,
 };
 
 export default variables;

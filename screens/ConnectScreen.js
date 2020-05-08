@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import * as appActions from '../store/actions/mainActions';
+import * as bluethoothActions from '../store/actions/bluethoothActions';
 import DeviceItem from '../components/DeviceItem';
 
 const ConnectScreen = (props) => {
@@ -43,15 +43,15 @@ const ConnectScreen = (props) => {
   }, []);
 
   useEffect(() => {
-    dispatch(appActions.intialize());
+    dispatch(bluethoothActions.intialize());
   }, []);
 
   const selectDeviceHandler = async (id) => {
-    await dispatch(appActions.connectToDevice(id));
+    await dispatch(bluethoothActions.connectToDevice(id));
   };
 
   const onDiscconect = () => {
-    dispatch(appActions.disconnectCurrentDevice());
+    dispatch(bluethoothActions.disconnectCurrentDevice());
   };
 
   return (

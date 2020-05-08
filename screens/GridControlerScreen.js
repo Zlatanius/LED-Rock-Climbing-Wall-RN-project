@@ -3,7 +3,7 @@ import {Text, Button, View, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import HoldsGrid from '../components/HoldsGrid';
-import * as mainActions from '../store/actions/mainActions';
+import * as bluethoothActions from '../store/actions/bluethoothActions';
 import * as gridActions from '../store/actions/girdActions';
 
 const GridControlerScreen = (props) => {
@@ -11,7 +11,7 @@ const GridControlerScreen = (props) => {
   const selectedHold = useSelector((state) => state.grid.currentHold);
 
   const selectHandler = (holdData) => {
-    dispatch(mainActions.sendMessage(`${holdData}\n`));
+    dispatch(bluethoothActions.sendMessage(`${holdData}\n`));
   };
 
   const addHoldHandler = () => {
@@ -19,7 +19,7 @@ const GridControlerScreen = (props) => {
   };
 
   const resetHandler = () => {
-    dispatch(mainActions.sendMessage(`R\n`));
+    dispatch(bluethoothActions.sendMessage(`R\n`));
     dispatch(gridActions.reset());
   };
 

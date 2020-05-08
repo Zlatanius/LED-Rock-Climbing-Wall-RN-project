@@ -1,4 +1,4 @@
-import {ADD_HOLD, SELECT_HOLD, RESET} from '../actions/girdActions';
+import {ADD_HOLD_G, SELECT_HOLD, RESET} from '../actions/girdActions';
 
 const initialState = {
   selectedHolds: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_HOLD:
+    case ADD_HOLD_G:
       if (!state.selectedHolds.find((hold) => hold === action.holdId)) {
         return {
           ...state,

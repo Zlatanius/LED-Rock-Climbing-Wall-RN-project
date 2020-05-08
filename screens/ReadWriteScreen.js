@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, Button, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import * as mainActions from '../store/actions/mainActions';
+import * as bluethoothActions from '../store/actions/bluethoothActions';
 import ENV from '../env';
 
 const ReadWriteScreen = (props) => {
@@ -26,11 +26,11 @@ const ReadWriteScreen = (props) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(mainActions.sendMessage(data + '\n'));
+    dispatch(bluethoothActions.sendMessage(data + '\n'));
   };
 
   const onDiscconect = async () => {
-    await dispatch(mainActions.disconnectCurrentDevice());
+    await dispatch(bluethoothActions.disconnectCurrentDevice());
     props.navigation.navigate('Connect');
   };
 
