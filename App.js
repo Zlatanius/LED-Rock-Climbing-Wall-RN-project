@@ -14,13 +14,11 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import BluethoothModule, {BTCharsets} from 'react-native-bluetooth-classic';
 import bluethoothReducer from './store/reducers/bluethoothReducer';
-import gridReducer from './store/reducers/gridReducer';
 import ledReducer from './store/reducers/ledReducer';
 import AppNavigatior from './navigation/AppNavigator';
 
 const rootReducer = combineReducers({
   main: bluethoothReducer,
-  grid: gridReducer,
   leds: ledReducer,
 });
 

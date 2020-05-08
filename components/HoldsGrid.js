@@ -3,27 +3,16 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  View,
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-
-import * as gridActions from '../store/actions/girdActions';
 
 const HoldsGrid = (props) => {
-  const dispatch = useDispatch();
   const windowWidth = Dimensions.get('window').width;
-  const selectedHolds = useSelector((state) => state.grid.selectedHolds);
-
-  let holds = [];
-  for (let i = 0; i < props.numOfHolds; i++) {
-    holds.push(i);
-  }
 
   return (
     <FlatList
-      data={holds}
+      data={props.holds}
       numColumns={props.numOfColumns}
       renderItem={(itemData) => {
         return (
@@ -31,36 +20,19 @@ const HoldsGrid = (props) => {
             style={{
               ...styles.gridItem,
               width: windowWidth / props.numOfColumns,
-              backgroundColor: selectedHolds.some((hold) => {
-                const currHold = hold > 4 ? hold + 1 : hold;
-                return itemData.item === currHold;
-              })
-                ? 'green'
-                : 'white',
+              backgroundColor:
+                itemData.item.state || itemData.item.id === props.selectedHold
+                  ? 'green'
+                  : 'white',
             }}
             onPress={() => {
-              let currHolds = '';
-              selectedHolds.forEach((hold) => {
-                currHolds = `${currHolds}${hold} 2 `;
-              });
-              console.log(currHolds);
-              if (itemData.item < 6) {
-                props.handleSelect(
-                  `L${currHolds ? currHolds : ''}${itemData.item} 2`,
-                );
-                dispatch(gridActions.selectHold(itemData.item));
-              } else {
-                props.handleSelect(
-                  `L${currHolds ? currHolds : ''}${itemData.item - 1} 2`,
-                );
-                dispatch(gridActions.selectHold(itemData.item - 1));
-              }
+              props.onSelect(itemData.item.id);
             }}>
-            <Text>{itemData.item + 1}</Text>
+            <Text>{itemData.item.id + 1}</Text>
           </TouchableOpacity>
         );
       }}
-      keyExtractor={(item) => item.toString()}
+      keyExtractor={(item) => item.id.toString()}
     />
   );
 };

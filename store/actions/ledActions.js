@@ -2,6 +2,7 @@ import * as bluethoothActions from './bluethoothActions';
 
 export const CHANGE_COURSOR_POS = 'CHANGE_COURSOR_POS';
 export const ADD_HOLD = 'ADD_HOLD';
+export const RESET = 'RESET';
 
 export const updateLeds = () => {
   return async (dispatch, getState) => {
@@ -23,9 +24,19 @@ export const updateLeds = () => {
 };
 
 export const setCursor = (holdId) => {
-  return {type: CHANGE_COURSOR_POS, holdId};
+  return (dispatch) => {
+    dispatch({type: CHANGE_COURSOR_POS, holdId});
+    dispatch(updateLeds());
+  };
 };
 
 export const addHold = () => {
   return {type: ADD_HOLD};
+};
+
+export const resetLeds = () => {
+  return async (dispatch) => {
+    dispatch(bluethoothActions.sendMessage(`R\n`));
+    dispatch({type: RESET});
+  };
 };
