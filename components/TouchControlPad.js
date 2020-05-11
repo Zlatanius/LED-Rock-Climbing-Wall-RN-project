@@ -65,7 +65,7 @@ const TouchControlerPad = (props) => {
 const styles = StyleSheet.create({
   touchPad: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#999',
   },
 });
 

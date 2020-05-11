@@ -11,6 +11,10 @@ const TouchControlerScreen = (props) => {
   const dispatch = useDispatch();
   //console.log(`Height outside: ${touchPadHeight}`);
 
+  const resetHandler = () => {
+    dispatch(ledActions.resetLeds());
+  };
+
   return (
     <View>
       <View
@@ -25,19 +29,12 @@ const TouchControlerScreen = (props) => {
       </View>
       <View>
         <Button
-          title="TEST SELECT"
-          onPress={() => {
-            console.log('test');
-            dispatch(ledActions.setCursor(30));
-            dispatch(ledActions.updateLeds());
-          }}
-        />
-        <Button
           title="ADD HOLD"
           onPress={() => {
             dispatch(ledActions.addHold());
           }}
         />
+        <Button style={styles.button} title="RESET" onPress={resetHandler} />
       </View>
     </View>
   );
