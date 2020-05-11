@@ -94,13 +94,13 @@ By nature this project is hard to explain in words, so here are a couple of vide
 
 #### Grid Controller:
 
-<iframe src='https://gfycat.com/ifr/HorribleTautCondor' frameborder='0' scrolling='no' allowfullscreen width='640' height='404'></iframe>
+https://gfycat.com/horribletautcondor
 
 
 
 #### Touch pad controller:
 
-<iframe src='https://gfycat.com/ifr/RemoteFloweryAsiaticmouflon' frameborder='0' scrolling='no' allowfullscreen width='640' height='404'></iframe>
+https://gfycat.com/remotefloweryasiaticmouflon
 
 
 
