@@ -6,7 +6,7 @@ Outdoor rock climbing is a sport where the objective is to get to the top of the
 
 
 
-<img src="E:\Zlatan\Desktop\LED Rock Climbing Wall README\README media\67db305f22acc48a82f4be2c9dd4c3e4.jpg" alt="67db305f22acc48a82f4be2c9dd4c3e4" style="zoom: 33%;" />
+<img src="./README media\67db305f22acc48a82f4be2c9dd4c3e4.jpg" alt="67db305f22acc48a82f4be2c9dd4c3e4" style="zoom: 33%;" />
 
 <p style="text-align: center;">Example of a the moon board climbing wall.</p>
 
@@ -70,7 +70,7 @@ Currently there are two ways to control an LED matrix, the grid controller and t
 
 **Manual message screen:** this screen allows you to manually send messages to a device you are connected to. It is mostly used for testing.
 
-<img src="E:\Zlatan\Desktop\LED Rock Climbing Wall README\README media\Screenshot_2020-05-11-15-08-38.png" alt="Screenshot_2020-05-11-15-08-38" style="zoom:50%;" />
+<img src="./README media\Screenshot_2020-05-11-15-08-38.png" alt="Screenshot_2020-05-11-15-08-38" style="zoom:50%;" />
 
 
 
