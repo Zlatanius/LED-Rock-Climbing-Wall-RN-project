@@ -6,7 +6,6 @@ import TouchControlPad from '../components/TouchControlPad';
 import * as ledActions from '../store/actions/ledActions';
 
 const TouchControlerScreen = (props) => {
-  const [touchPadHeight, setTouchPadHeight] = useState(0);
   const selectedHold = useSelector((state) => state.leds.cursorPosition);
   const dispatch = useDispatch();
   //console.log(`Height outside: ${touchPadHeight}`);
@@ -17,15 +16,8 @@ const TouchControlerScreen = (props) => {
 
   return (
     <View>
-      <View
-        style={styles.touchPad}
-        onLayout={(event) => {
-          setTouchPadHeight(event.nativeEvent.layout.height);
-        }}>
-        <TouchControlPad
-          selectedHold={selectedHold}
-          heightOfElement={touchPadHeight}
-        />
+      <View style={styles.touchPad}>
+        <TouchControlPad selectedHold={selectedHold} />
       </View>
       <View>
         <Button
