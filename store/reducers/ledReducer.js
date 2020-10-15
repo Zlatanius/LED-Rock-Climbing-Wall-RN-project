@@ -1,5 +1,10 @@
 import env from '../../env';
-import {CHANGE_COURSOR_POS, ADD_HOLD, RESET} from '../actions/ledActions';
+import {
+  CHANGE_COURSOR_POS,
+  ADD_HOLD,
+  RESET,
+  CHANGE_LED_TYPE,
+} from '../actions/ledActions';
 import Hold from '../../models/Hold';
 
 let initialHolds = env.holds;
@@ -7,6 +12,7 @@ let initialHolds = env.holds;
 const initialState = {
   holds: initialHolds,
   cursorPosition: 0,
+  ledType: true, //true = MAX2719, false = RGB
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +32,9 @@ export default (state = initialState, action) => {
         ...initialState,
         holds: emptyHolds,
       };
+    case CHANGE_LED_TYPE:
+      return {...state, ledType: !state.ledType};
+
     default:
       return initialState;
   }

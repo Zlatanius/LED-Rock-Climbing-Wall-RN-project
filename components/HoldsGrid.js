@@ -39,7 +39,7 @@ const HoldsGrid = (props) => {
 
 const styles = StyleSheet.create({
   gridItem: {
-    height: 50,
+    height: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'black',

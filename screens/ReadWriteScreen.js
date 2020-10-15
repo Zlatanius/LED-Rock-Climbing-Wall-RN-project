@@ -29,9 +29,8 @@ const ReadWriteScreen = (props) => {
     dispatch(bluethoothActions.sendMessage(data + '\n'));
   };
 
-  const onDiscconect = async () => {
-    await dispatch(bluethoothActions.disconnectCurrentDevice());
-    props.navigation.navigate('Connect');
+  const onDiscconect = () => {
+    dispatch(bluethoothActions.disconnectCurrentDevice());
   };
 
   const goThruTest = (numOfLeds, delay) => {
