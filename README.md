@@ -14,7 +14,7 @@ Outdoor rock climbing is a sport where the objective is to get to the top of the
 
 ## Warnings
 
-- This project is still very young. The work on the app started only about a month ago, this means that it only has basic functionality and bare minimum of styling.
+- This project is still very young. This means that it only has basic functionality and bare minimum of styling.
 - This project has only been tested on android and there are no guarantees it works on iOS.
 - All information is subject to change.
 
