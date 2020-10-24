@@ -6,7 +6,7 @@ Outdoor rock climbing is a sport where the objective is to get to the top of the
 
 
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/67db305f22acc48a82f4be2c9dd4c3e4.jpg?raw=true" style="zoom: 50%;" />
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/67db305f22acc48a82f4be2c9dd4c3e4.jpg?raw=true" height="650" />
 
 <p style="text-align: center;">Example of a the moon board climbing wall.</p>
 
@@ -64,25 +64,25 @@ Currently there are two ways to control an LED matrix, the grid controller and t
 
 **Connect device screen:** this is the first screen of the app. This screen displays the paired devices and allows you to connect to a device of your choice, or disconnect from the device you are currently connected to. It also presents basic information about each device and the connected status.
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-15-05-24.png?raw=true" style="zoom:50%;" />
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-15-05-24.png?raw=true" height="650" />
 
 
 
 **Manual message screen:** this screen allows you to manually send messages to a device you are connected to. It is mostly used for testing.
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-15-08-38.png?raw=true" style="zoom:50%;" />
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-15-08-38.png?raw=true" height="650" />
 
 
 
 **The grid controller** is intended to be used when the holds are arranged in a grid pattern. It is pretty simple as it consists of a grid layout that corresponds to the holds on the wall. You can select holds by pressing on the corresponding grid tile and add holds to the boulder by pressing the "ADD HOLD" button.
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-14-14-47.png?raw=true" style="zoom: 50%;" />
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-14-14-47.png?raw=true" height="650" />
 
 
 
 **Touch pad controller** is intended for walls with irregularly placed holds. It utilizes the fact that all the LEDs are connected in series (only the signal lines are in series) and effectively results in the whole matrix acting as a long chain of LEDs. This control mode works by essentially letting the user move the selected LED along the chain and selecting the hold they wish to use. By scrolling right on the touch pad the selected LED moves to the right, and by scrolling left it moves to the left.
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-14-39-24.png?raw=true" style="zoom: 50%;" />
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-14-39-24.png?raw=true" height="650" />
 
 
 
@@ -94,13 +94,13 @@ By nature this project is hard to explain in words, so here are a couple of vide
 
 #### Grid Controller:
 
-<iframe src='https://gfycat.com/ifr/HorribleTautCondor' frameborder='0' scrolling='no' allowfullscreen width='640' height='404'></iframe>
+![Grid contoller example](https://media.giphy.com/media/EkKHw46r6m3EA10P8W/giphy-downsized-large.gif)
 
 
 
 #### Touch pad controller:
 
-<iframe src='https://gfycat.com/ifr/RemoteFloweryAsiaticmouflon' frameborder='0' scrolling='no' allowfullscreen width='640' height='404'></iframe>
+![Touch contoller example](https://media.giphy.com/media/wQxN1a9Km3QZELKSLA/giphy-downsized-large.gif)
 
 
 
