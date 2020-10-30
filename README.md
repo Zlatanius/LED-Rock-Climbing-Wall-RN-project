@@ -104,6 +104,16 @@ By nature this project is hard to explain in words, so here are a couple of vide
 
 
 
+
+
+## Finished version
+
+
+
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/IMG_20201027_222226.jpg?raw=true" height="650" />
+
+
+
 ## Future Plans
 
 - As previously stated almost no styling work has been done on this project, so that will definitely have to be done
