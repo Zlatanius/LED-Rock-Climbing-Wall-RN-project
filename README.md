@@ -116,7 +116,9 @@ Here is a couple of pictures and videos of the Moonboard in our local gym with t
 
 
 
-<img src="https://media.giphy.com/media/80lsQBUuwxX08EevT3/giphy.gif" alt="Grid example" height="650" />
+![Touch contoller example](https://media.giphy.com/media/80lsQBUuwxX08EevT3/giphy.gif)
+
+
 
 
 
