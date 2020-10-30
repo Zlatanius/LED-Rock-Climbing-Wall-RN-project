@@ -108,9 +108,15 @@ By nature this project is hard to explain in words, so here are a couple of vide
 
 ## Finished version
 
+Here is a couple of pictures and videos of the Moonboard in our local gym with the system installed (the LEDs are much easier to see on real life).
 
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/IMG_20201027_222226.jpg?raw=true" height="650" />
+
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/IMG_20201027_222226.jpg?raw=true?raw=true" height="650" />
+
+
+
+<img src="https://media.giphy.com/media/80lsQBUuwxX08EevT3/giphy.gif" alt="Grid example" height="650" />
 
 
 
