@@ -1,9 +1,8 @@
 import * as bluethoothActions from './bluethoothActions';
 
-export const CHANGE_COURSOR_POS = 'CHANGE_COURSOR_POS';
-export const ADD_HOLD = 'ADD_HOLD';
 export const RESET = 'RESET';
 export const CHANGE_LED_TYPE = 'CHANGE_LED_TYPE';
+export const TOGGLE_HOLD = 'TOGGLE_HOLD';
 
 const idToCoords = (id) => {
   const y = Math.floor(id / 11);
@@ -15,13 +14,6 @@ export const updateLeds = () => {
   return async (dispatch, getState) => {
     console.log('updating leds');
     console.log(`Led Type is: ${getState().leds.ledType}`);
-    // const ledType =
-    const selectedHold = getState().leds.holds[getState().leds.cursorPosition];
-    console.log(
-      `X: ${idToCoords(selectedHold.id).x}, Y: ${
-        idToCoords(selectedHold.id).y
-      }`,
-    );
     const currHolds = getState().leds.holds.reduce((holdsString, currHold) => {
       let newHolds = holdsString;
       if (currHold.state) {
@@ -33,31 +25,20 @@ export const updateLeds = () => {
       }
       return newHolds;
     }, '');
-    dispatch(
-      bluethoothActions.sendMessage(
-        `L${
-          getState().leds.ledType
-            ? idToCoords(selectedHold.id).x
-            : selectedHold.id
-        } ${
-          getState().leds.ledType
-            ? idToCoords(selectedHold.id).y
-            : selectedHold.color
-        } ${currHolds}\n`,
-      ),
-    );
+    if (currHolds) {
+      dispatch(bluethoothActions.sendMessage(`L ${currHolds}\n`));
+    } else {
+      dispatch(resetLeds());
+    }
   };
 };
 
-export const setCursor = (holdId) => {
-  return (dispatch) => {
-    dispatch({type: CHANGE_COURSOR_POS, holdId});
+export const toggleHold = (holdId) => {
+  return (dispatch, getState) => {
+    console.log(`X: ${idToCoords(holdId).x}, Y: ${idToCoords(holdId).y}`);
+    dispatch({type: TOGGLE_HOLD, holdId});
     dispatch(updateLeds());
   };
-};
-
-export const addHold = () => {
-  return {type: ADD_HOLD};
 };
 
 export const resetLeds = () => {

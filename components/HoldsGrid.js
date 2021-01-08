@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {FlatList, Dimensions} from 'react-native';
+
+import HoldGridItem from '././HoldGridItem';
 
 const HoldsGrid = (props) => {
   const windowWidth = Dimensions.get('window').width;
@@ -13,38 +9,21 @@ const HoldsGrid = (props) => {
   return (
     <FlatList
       data={props.holds}
+      extraData={props.holds}
       numColumns={props.numOfColumns}
       renderItem={(itemData) => {
         return (
-          <TouchableOpacity
-            style={{
-              ...styles.gridItem,
-              width: windowWidth / props.numOfColumns,
-              backgroundColor:
-                itemData.item.state || itemData.item.id === props.selectedHold
-                  ? 'green'
-                  : 'white',
-            }}
-            onPress={() => {
-              props.onSelect(itemData.item.id);
-            }}>
-            <Text>{itemData.item.id + 1}</Text>
-          </TouchableOpacity>
+          <HoldGridItem
+            width={windowWidth / props.numOfColumns}
+            color={itemData.item.state ? 'green' : 'white'}
+            id={itemData.item.id}
+            onSelect={props.onSelect}
+          />
         );
       }}
       keyExtractor={(item) => item.id.toString()}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  gridItem: {
-    height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'black',
-    borderWidth: 1,
-  },
-});
 
 export default HoldsGrid;

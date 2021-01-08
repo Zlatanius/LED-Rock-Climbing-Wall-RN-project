@@ -8,15 +8,12 @@ import * as ledActions from '../store/actions/ledActions';
 const GridControlerScreen = (props) => {
   const dispatch = useDispatch();
   const holds = useSelector((state) => state.leds.holds);
-  const selectedHold = useSelector((state) => state.leds.cursorPosition);
-  const [isRgb, setIsRgb] = useState(false);
+  const [isRgb, setIsRgb] = useState(
+    !useSelector((state) => state.leds.ledType),
+  );
 
   const selectHandler = (holdId) => {
-    dispatch(ledActions.setCursor(holdId));
-  };
-
-  const addHoldHandler = () => {
-    dispatch(ledActions.addHold());
+    dispatch(ledActions.toggleHold(holdId));
   };
 
   const resetHandler = () => {
@@ -38,19 +35,8 @@ const GridControlerScreen = (props) => {
         />
         <Text>Using RGB</Text>
       </View>
-      <HoldsGrid
-        numOfHolds={49}
-        numOfColumns={11}
-        onSelect={selectHandler}
-        holds={holds}
-        selectedHold={selectedHold}
-      />
+      <HoldsGrid numOfColumns={11} onSelect={selectHandler} holds={holds} />
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          title="ADD HOLD"
-          onPress={addHoldHandler}
-        />
         <Button style={styles.button} title="RESET" onPress={resetHandler} />
       </View>
     </View>
@@ -70,7 +56,7 @@ const styles = StyleSheet.create({
   },
   switch: {},
   buttonContainer: {
-    height: '20%',
+    height: '10%',
     justifyContent: 'space-around',
   },
 });
