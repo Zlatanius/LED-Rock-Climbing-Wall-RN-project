@@ -26,7 +26,7 @@ export const updateLeds = () => {
       return newHolds;
     }, '');
     if (currHolds) {
-      dispatch(bluethoothActions.sendMessage(`L ${currHolds}\n`));
+      dispatch(bluethoothActions.sendMessage(`L${currHolds}\n`));
     } else {
       dispatch(resetLeds());
     }
