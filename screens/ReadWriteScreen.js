@@ -46,11 +46,12 @@ const ReadWriteScreen = (props) => {
     }, delay);
   };
 
-  return !isConnected ? (
-    <View style={styles.warning}>
-      <Text>There is no device connected</Text>
-    </View>
-  ) : (
+  // !isConnected ? (
+  //   <View style={styles.warning}>
+  //     <Text>There is no device connected</Text>
+  //   </View>
+  // ) :
+  return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button title="SUBMIT" onPress={onSubmit.bind(this, currentText)} />

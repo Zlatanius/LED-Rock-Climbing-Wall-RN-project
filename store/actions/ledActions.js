@@ -5,8 +5,8 @@ export const CHANGE_LED_TYPE = 'CHANGE_LED_TYPE';
 export const TOGGLE_HOLD = 'TOGGLE_HOLD';
 
 const idToCoords = (id) => {
-  const y = Math.floor(id / 11);
-  const x = id - y * 11;
+  const y = -(Math.floor(id / 11) - 17);
+  const x = id - Math.floor(id / 11) * 11;
   return {x, y};
 };
 
@@ -26,7 +26,7 @@ export const updateLeds = () => {
       return newHolds;
     }, '');
     if (currHolds) {
-      dispatch(bluethoothActions.sendMessage(`L${currHolds}\n`));
+      dispatch(bluethoothActions.sendMessage(`L${currHolds.trimEnd()}\n`));
     } else {
       dispatch(resetLeds());
     }

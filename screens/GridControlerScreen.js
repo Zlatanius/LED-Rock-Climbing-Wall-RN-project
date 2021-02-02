@@ -25,6 +25,12 @@ const GridControlerScreen = (props) => {
     setIsRgb(!isRgb);
   };
 
+  const idToCoords = (id) => {
+    const y = -(Math.floor(id / 11) - 17);
+    const x = id - Math.floor(id / 11) * 11;
+    return {x, y};
+  };
+
   return (
     <View style={styles.mainContianer}>
       <View style={styles.switchContainer}>
@@ -36,6 +42,21 @@ const GridControlerScreen = (props) => {
         <Text>Using RGB</Text>
       </View>
       <HoldsGrid numOfColumns={11} onSelect={selectHandler} holds={holds} />
+      <Text>
+        {'L' +
+          holds
+            .reduce((holdsString, currHold) => {
+              let newHolds = holdsString;
+              if (currHold.state) {
+                newHolds = `${idToCoords(currHold.id).x} ${
+                  idToCoords(currHold.id).y
+                } ${holdsString}`;
+              }
+              return newHolds;
+            }, '')
+            .trimEnd() +
+          '|'}
+      </Text>
       <View style={styles.buttonContainer}>
         <Button style={styles.button} title="RESET" onPress={resetHandler} />
       </View>
