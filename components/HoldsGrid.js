@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, Dimensions} from 'react-native';
 
 import HoldGridItem from '././HoldGridItem';
@@ -10,7 +10,12 @@ const HoldsGrid = (props) => {
     return (
       <HoldGridItem
         width={windowWidth / props.numOfColumns}
-        color={itemData.item.state ? 'green' : 'white'}
+        height={props.holdItemHeight ? props.holdItemHeight / 18 : 20}
+        color={
+          itemData.item.state
+            ? 'rgba(0, 0, 255, 0.6)'
+            : 'rgba(255, 255, 255, 0.0)'
+        }
         id={itemData.item.id}
         onSelect={props.onSelect}
       />

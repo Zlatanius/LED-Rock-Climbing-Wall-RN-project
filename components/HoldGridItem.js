@@ -10,16 +10,16 @@ const HoldGridItem = (props) => {
       style={{
         ...styles.gridItem,
         width: props.width,
+        height: props.height,
         backgroundColor: props.color,
       }}>
-      <Text>{props.id}</Text>
+      {/* <Text>{props.id}</Text> */}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   gridItem: {
-    height: 24,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'black',

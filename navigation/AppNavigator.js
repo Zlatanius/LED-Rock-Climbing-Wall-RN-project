@@ -3,10 +3,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import ConnectScreen from '../screens/ConnectScreen';
-import ReadWriteScreen from '../screens/ReadWriteScreen';
-import GridControlerScreen from '../screens/GridControlerScreen';
-import TouchConreolerScreen from '../screens/TouchControlerScreen';
+import ConnectScreen, {
+  screenOptions as connectScreenOpstions,
+} from '../screens/ConnectScreen';
+import ReadWriteScreen, {
+  screenOptions as readWriteScreenOpstions,
+} from '../screens/ReadWriteScreen';
+import GridControlerScreen, {
+  screenOptions as gridControlerScreenOpstions,
+} from '../screens/GridControlerScreen';
+import TouchConreolerScreen, {
+  screenOptions as touchControllerScreenOpstions,
+} from '../screens/TouchControlerScreen';
 
 const ConnectStackNavigator = createStackNavigator();
 const ConnectNavigator = () => {
@@ -15,6 +23,7 @@ const ConnectNavigator = () => {
       <ConnectStackNavigator.Screen
         name="ConnectDeviceScreen"
         component={ConnectScreen}
+        options={connectScreenOpstions}
       />
     </ConnectStackNavigator.Navigator>
   );
@@ -27,6 +36,7 @@ const ReadWriteNavigator = () => {
       <ReadWriteStackNavigator.Screen
         name="ReadWriteScreen"
         component={ReadWriteScreen}
+        options={readWriteScreenOpstions}
       />
     </ReadWriteStackNavigator.Navigator>
   );
@@ -39,6 +49,7 @@ const GridControlerNavigator = () => {
       <GridControlerStackNavigator.Screen
         name="GridControlerScreen"
         component={GridControlerScreen}
+        options={gridControlerScreenOpstions}
       />
     </GridControlerStackNavigator.Navigator>
   );
@@ -51,6 +62,7 @@ const TouchConreolerNavigator = () => {
       <TouchConreolerStackNavigator.Screen
         name="TouchControlerScreen"
         component={TouchConreolerScreen}
+        options={touchControllerScreenOpstions}
       />
     </TouchConreolerStackNavigator.Navigator>
   );

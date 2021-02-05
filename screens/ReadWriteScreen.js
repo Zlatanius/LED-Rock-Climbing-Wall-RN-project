@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, Button, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 import * as bluethoothActions from '../store/actions/bluethoothActions';
-import ENV from '../env';
+import HeaderButton from '../components/HeaderButton';
 
 const ReadWriteScreen = (props) => {
   const [currentText, setCurrentText] = useState('');
@@ -65,6 +66,23 @@ const ReadWriteScreen = (props) => {
       />
     </View>
   );
+};
+
+export const screenOptions = (navData) => {
+  return {
+    headerTitle: 'Manual Wrtie',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName={'md-menu'}
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({

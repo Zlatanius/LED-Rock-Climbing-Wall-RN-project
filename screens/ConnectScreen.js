@@ -9,9 +9,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 import * as bluethoothActions from '../store/actions/bluethoothActions';
 import DeviceItem from '../components/DeviceItem';
+import HeaderButton from '../components/HeaderButton';
 
 const ConnectScreen = (props) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -82,6 +84,23 @@ const ConnectScreen = (props) => {
       </View>
     </View>
   );
+};
+
+export const screenOptions = (navData) => {
+  return {
+    headerTitle: 'Connect Device',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName={'md-menu'}
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({

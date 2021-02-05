@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 import TouchControlPad from '../components/TouchControlPad';
 import * as ledActions from '../store/actions/ledActions';
+import HeaderButton from '../components/HeaderButton';
 
 const TouchControlerScreen = (props) => {
   const selectedHold = useSelector((state) => state.leds.cursorPosition);
@@ -30,6 +32,23 @@ const TouchControlerScreen = (props) => {
       </View>
     </View>
   );
+};
+
+export const screenOptions = (navData) => {
+  return {
+    headerTitle: 'Touch Controller',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName={'md-menu'}
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({
