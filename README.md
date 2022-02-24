@@ -74,11 +74,17 @@ Currently there are two ways to control an LED matrix, the grid controller and t
 
 
 
-**The grid controller** is intended to be used when the holds are arranged in a grid pattern. It is pretty simple as it consists of a grid layout that corresponds to the holds on the wall. You can select holds by pressing on the corresponding grid tile and add holds to the boulder by pressing the "ADD HOLD" button.
+**The grid controller** is intended to be used when the holds are arranged in a grid pattern. It is pretty simple as it consists of a grid layout that corresponds to the holds on the wall. You can select holds by pressing on the corresponding grid tile and unselect it by pressing it again. Once selected the correspondig hold will light up. The reset button will unselect all holds.
 
-<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Screenshot_2020-05-11-14-14-47.png?raw=true" height="650" />
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Grid%20controller%20without%20backgound.jpg" height="650" />
 
+In the grid controller you can also add a boudler from the official moonboard app and set it as a background for the grid. By pressing the "PICK BOUDLER" button an image picker screen will open. Here you need to crop the screenshot so only the hollds remain.
 
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Image%20picker.jpg" height="650" />
+
+After this is done the holds from the image will align with holds on the controller and you can easily slecet the correct holds rather than having to switch between apps.
+
+<img src="https://github.com/Zlatanius/LED-Rock-Climbing-Wall-RN-project/blob/master/README_media/Grid%20controller%20with%20background.jpg" height="650" />
 
 **Touch pad controller** is intended for walls with irregularly placed holds. It utilizes the fact that all the LEDs are connected in series (only the signal lines are in series) and effectively results in the whole matrix acting as a long chain of LEDs. This control mode works by essentially letting the user move the selected LED along the chain and selecting the hold they wish to use. By scrolling right on the touch pad the selected LED moves to the right, and by scrolling left it moves to the left.
 
